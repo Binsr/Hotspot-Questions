@@ -1,5 +1,24 @@
 @charset "UTF-8";
 
 body{
-	background-color:white;	
+	background-color:#000000;	
+}
+
+.control_menu{
+	float:right;	
+
+}
+
+#shape_select{
+	color:white;
+}
+
+#colision_switch{
+	color:white;
+}
+
+#question_text{
+	font-size: inherit;
+	color:green;
+	width: 30vmin;
 }
