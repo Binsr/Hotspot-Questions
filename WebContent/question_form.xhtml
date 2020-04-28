@@ -2,19 +2,19 @@
 <!DOCTYPE html>
 <html lang="en"
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>Hello World - Input Form</title>
+        <title>Question page</title>
         <h:outputStylesheet library="css" name="style.css"/>
     </h:head>
     <h:body>
-    	<h:form enctype="multipart/form-data">
-			<h:inputTextarea id="question_text"/>
+    	<h:form>
+ 			<h:inputText id="question_text" value="#{question.text}"/>
 			<br/><br/>
-			<h:inputFile/>
-			<br/><br/>
-			<h:commandButton value="Upload" action="selection_form"/>
+			
+			<h:commandButton value="Submit" action="selection_form"/>
 		</h:form>
     </h:body>
 </html>
