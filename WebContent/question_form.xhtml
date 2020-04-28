@@ -10,10 +10,10 @@
         <h:outputStylesheet library="css" name="style.css"/>
     </h:head>
     <h:body>
-    	<h:form>
+    	<h:form enctype="multipart/form-data">
  			<h:inputText id="question_text" value="#{question.text}"/>
 			<br/><br/>
-			
+			<p:fileUpload value="#{question.picture}"/>
 			<h:commandButton value="Submit" action="selection_form"/>
 		</h:form>
     </h:body>
