@@ -1,20 +1,50 @@
 
 <!DOCTYPE html>
-<html lang="en"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-    <h:head>
-        <title>Question page</title>
-        <h:outputStylesheet library="css" name="style.css"/>
-    </h:head>
-    <h:body>
-    	<h:form enctype="multipart/form-data">
- 			<h:inputText id="question_text" value="#{question.text}"/>
-			<br/><br/>
-			<p:fileUpload value="#{question.picture}"/>
-			<h:commandButton value="Submit" action="selection_form"/>
-		</h:form>
-    </h:body>
+<h:head>
+	<title>Selection Page</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<h:outputText value="Keyup: " />
+		<p:inputText id="counter" value="#{listenerView.text}">
+			<p:ajax event="keyup" update="out"
+				listener="#{listenerView.handleKeyEvent}" />
+		</p:inputText>
+		<h:outputText id="out" value="#{listenerView.text}" />
+	</h:form>
+	<h:panelGroup class="control_menu" layout="block">
+		<form>
+			<p:selectOneMenu style="width:150px" id="send">
+				<f:selectItem itemLabel="Rect" itemValue="Rect" id="Rect"/>
+				<f:selectItem itemLabel="Circle" itemValue="Circle" id="Circle"/>
+				<p:ajax listener="#{runetimeStates.setShape}" process="@this" update="chosen_shape"/>
+			</p:selectOneMenu>
+			<h:outputText id="chosen_shape" value="#{runetimeStates.shape}" />
+		</form>
+
+		<br />
+		<br />
+		<h:selectOneRadio id="colision_switch">
+			<f:selectItem itemValue="ColisionOn" itemLabel="C: On" />
+			<f:selectItem itemValue="ColisionOff" itemLabel="C: Off" />
+		</h:selectOneRadio>
+		<br />
+		<br />
+
+		<h:commandButton id="undo_button" value="undo" type="submit" />
+		<br />
+		<br />
+
+		<h:commandButton id="submit_button" value="submit" type="submit" />
+	</h:panelGroup>
+
+	<h:outputScript library="js" name="index.js" />
+</h:body>
 </html>

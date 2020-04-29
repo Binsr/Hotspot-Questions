@@ -1,0 +1,15 @@
+   /*
+   public StreamedContent getContents() {
+      FacesContext context = FacesContext.getCurrentInstance();
+   
+      if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+         return new DefaultStreamedContent();
+      } else {
+         return new DefaultStreamedContent(new ByteArrayInputStream(contents));
+      }
+   }
+   
+   public void uploadListener(FileUploadEvent event) {
+      UploadedFile file = event.getFile();
+      this.contents = file.getContents();
+   }*/
