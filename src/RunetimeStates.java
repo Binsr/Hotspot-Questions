@@ -1,28 +1,30 @@
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.FacesEvent;
+
+/* Za vezbu */
 
 @RequestScoped
 @ManagedBean
 public class RunetimeStates {
-   
-   private String shape= "nothing";
+
+   private String shape;
    private String colision;
-   
+
    public RunetimeStates() {
-      this.shape= "nothing";
+      this.shape = "Rect";
+      this.colision = "false";
    }
 
    public String getShape() {
       return shape;
    }
 
-   public void setShape(FacesEvent event) {
-      this.shape = event.getComponent().toString();
+   public void setShape(String shape) {
+      this.shape = shape;
    }
-   
+
    public void update() {
-      this.shape= "Drugo";
+      this.shape = "Drugo";
    }
 
    public String getColision() {
@@ -32,9 +34,9 @@ public class RunetimeStates {
    public void setColision(String colision) {
       this.colision = colision;
    }
+
    public void change(String shape) {
-      this.shape= shape;
+      this.shape = shape;
    }
 
-   
 }
