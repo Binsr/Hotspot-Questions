@@ -1,34 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <title>Selection Page</title>
-        <h:outputStylesheet library="css" name="style.css"/>
-    </h:head>
-    <h:body>
-		<h:panelGroup class="control_menu" layout="block">
-			<h:selectOneRadio id="shape_select">
-				<f:selectItem itemValue="Rect" itemLabel="Rect"/>
-				<f:selectItem itemValue="Circle" itemLabel="Circle"/>
-			</h:selectOneRadio>
-			
-			<br/><br/>
-			<h:selectOneRadio id="colision_switch">
-				<f:selectItem itemValue="ColisionOn" itemLabel="C: On"/>
-				<f:selectItem itemValue="ColisionOff" itemLabel="C: Off"/>
-			</h:selectOneRadio>
-			<br/><br/>
-			
-			<h:commandButton id="undo_button" value="undo" type="submit"/>
-			<br/><br/>
-			
-			<h:commandButton id="submit_button" value="submit" type="submit"/>
-		</h:panelGroup>
-		
-        <h:outputScript library="js" name="index.js"/>
+<h:head>
+	<title>Selection Page</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<ui:include src="question_form.xhtml" rendered="true">
+		<ui:param name="runetimeStates" value="#{parent.child}"></ui:param>
+	</ui:include>
+		#{parent.child.colision}
     </h:body>
 </html>

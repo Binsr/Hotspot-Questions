@@ -1,45 +1,47 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
-
-<h:head>
+ -->
+<!-- <h:head>
 	<title>First Page</title>
 	<h:outputStylesheet library="css" name="style.css" />
-</h:head>
-<h:body>
-	<h:form>
+</h:head -->
 
-		<div>
-			<h:panelGroup class="control_menu" layout="block" id="control_menu">
-				<p:selectOneMenu style="width:150px" id="send"
-					value="#{runetimeStates.shape}">
-					<f:selectItem itemLabel="Rect" itemValue="Rect" id="Rect" />
-					<f:selectItem itemLabel="Circle" itemValue="Circle" id="Circle" />
-					<p:ajax process="@this" oncomplete="updateShape()" update="send chosen_shape" />
-				</p:selectOneMenu>
-				<br />
-				<br />
-				<p:selectBooleanButton widgetvar="colision_button" id="colision_button" onLabel="on" offLabel="off"
-					value="#{runetimeStates.colision}">
-					<p:ajax process="@this"  oncomplete="updateColision()" update="colision_value" />
-				</p:selectBooleanButton>
-	
-				<p:inputText type="hidden" id="colision_value" value="#{runetimeStates.colision}" />
-				<p:inputText type="hidden" id="chosen_shape" value="#{runetimeStates.shape}" />
-	
-				<br />
-				<br />
-				<p:commandButton id="undo_button" value="undo" type="submit" />
-				<br />
-				<br />
-	
-				<p:commandButton id="submit_button" value="submit" type="submit" />
-			</h:panelGroup>
-		</div>
-
-		<h:outputScript library="js" name="index.js" />
-	</h:form>
-</h:body>
-</html>
+	<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	>
+			<h:form>
+				<h:panelGroup class="control_menu" layout="block" id="control_menu">
+					<p:selectOneMenu style="width:150px" id="send"
+						value="#{runetimeStates.shape}">
+						<f:selectItem itemLabel="Rect" itemValue="Rect" id="Rect" />
+						<f:selectItem itemLabel="Circle" itemValue="Circle" id="Circle" />
+						<p:ajax process="@this" oncomplete="updateShape()" update="send chosen_shape" />
+					</p:selectOneMenu>
+					<br />
+					<br />
+					<p:selectBooleanButton widgetvar="colision_button" id="colision_button" onLabel="on" offLabel="off"
+						value="#{runetimeStates.colision}">
+						<p:ajax process="@this"  oncomplete="updateColision()" update="colision_value" />
+					</p:selectBooleanButton>
+		
+					<p:inputText type="" id="colision_value" value="#{runetimeStates.colision}" />
+					<p:inputText type="" id="chosen_shape" value="#{runetimeStates.shape}" />
+		
+					<br />
+					<br />
+					<p:commandButton id="undo_button" value="undo" type="submit" />
+					<br />
+					<br />
+		
+					<p:commandButton id="submit_button" value="submit" type="submit" />
+				</h:panelGroup>
+				<h:outputScript library="js" name="index.js" />
+			</h:form>
+	</ui:composition>
