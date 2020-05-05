@@ -11,8 +11,8 @@
 </h:head>
 <h:body>
 	<ui:include src="question_form.xhtml" rendered="true">
-		<ui:param name="runetimeStates" value="#{parent.child}"></ui:param>
 	</ui:include>
-		#{parent.child.colision}
+	
+	<h:outputScript library="js" name="index.js" />
     </h:body>
 </html>

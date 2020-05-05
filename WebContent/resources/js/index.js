@@ -17,21 +17,21 @@ let ctx= canvas.getContext("2d");*/
 
 
 const colisionBtn= document.getElementById("j_idt6:colision_button");
-let colisionState= null;
+let colisionState= false;
+let selectedShape= "Rect";
 
 function updateColision(){
-	let colisionInput= document.getElementById("j_idt6:colision_value");
-	colisionState= colisionInput.value;
+	colisionState= !colisionState;
 	console.log(colisionState + " :Colision state updated~~");
 }
 
-let chosenShape= null;
-
 function updateShape(){
-	let shapeInput= document.getElementById("j_idt6:chosen_shape");
-	chosenShape= shapeInput.value;
-	console.log(chosenShape + " :Shape state updated~~");
+	selectedShape= PF("shape").getSelectedValue();
+	console.log(selectedShape);
 }
 
+document.getElementById("undo_button").addEventListener("click", function(){
+	console.log("UNDO CLICKED");
+});
 
 

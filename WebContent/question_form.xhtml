@@ -18,30 +18,25 @@
 	>
 			<h:form>
 				<h:panelGroup class="control_menu" layout="block" id="control_menu">
-					<p:selectOneMenu style="width:150px" id="send"
-						value="#{runetimeStates.shape}">
+					<p:selectOneMenu style="width:150px" id="selected_shape" widgetVar="shape">
 						<f:selectItem itemLabel="Rect" itemValue="Rect" id="Rect" />
 						<f:selectItem itemLabel="Circle" itemValue="Circle" id="Circle" />
-						<p:ajax process="@this" oncomplete="updateShape()" update="send chosen_shape" />
+						<p:ajax process="@this" oncomplete="updateShape()"/>
 					</p:selectOneMenu>
 					<br />
 					<br />
 					<p:selectBooleanButton widgetvar="colision_button" id="colision_button" onLabel="on" offLabel="off"
 						value="#{runetimeStates.colision}">
-						<p:ajax process="@this"  oncomplete="updateColision()" update="colision_value" />
+						<p:ajax process="@this"  oncomplete="updateColision()"/>
 					</p:selectBooleanButton>
 		
-					<p:inputText type="" id="colision_value" value="#{runetimeStates.colision}" />
-					<p:inputText type="" id="chosen_shape" value="#{runetimeStates.shape}" />
-		
 					<br />
 					<br />
-					<p:commandButton id="undo_button" value="undo" type="submit" />
+					<p:commandButton id="undo_button" value="undo"/>
 					<br />
 					<br />
 		
-					<p:commandButton id="submit_button" value="submit" type="submit" />
+					<p:commandButton id="submit_button" value="submit" />
 				</h:panelGroup>
-				<h:outputScript library="js" name="index.js" />
 			</h:form>
 	</ui:composition>
