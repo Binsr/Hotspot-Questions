@@ -30,8 +30,10 @@ function updateShape(){
 	console.log(selectedShape);
 }
 
-document.getElementById("undo_button").addEventListener("click", function(){
+document.getElementById("j_idt6:undo_button").addEventListener("click", function(){
 	console.log("UNDO CLICKED");
 });
-
+document.getElementById("j_idt6:submit_button").addEventListener("click", function(){
+	console.log("SUBMIT CLICKED");
+});
 
