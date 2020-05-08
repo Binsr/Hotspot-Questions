@@ -37,3 +37,11 @@ document.getElementById("j_idt6:submit_button").addEventListener("click", functi
 	console.log("SUBMIT CLICKED");
 });
 
+
+
+
+
+
+
+
+
