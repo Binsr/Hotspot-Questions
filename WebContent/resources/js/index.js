@@ -56,12 +56,12 @@ function updateShape(){
 	console.log(selectedShape);
 }
 
-//document.getElementById("j_idt6:undo_button").addEventListener("click", function(){
-//	console.log("UNDO CLICKED");
-//});
-//document.getElementById("submit_button").addEventListener("click", function(){
-//	console.log("SUBMIT CLICKED");
-//});
+document.getElementById("j_idt6:undo_button").addEventListener("click", function(){
+	console.log("UNDO CLICKED");
+});
+document.getElementById("j_idt6:submit_button").addEventListener("click", function(){
+	console.log("SUBMIT CLICKED");
+});
 
 //------------------------------------------------------------------------UPLOAD PIC-----------------------------------------------------------
 
@@ -75,8 +75,8 @@ function uploadPic(){
     reader.addEventListener("load",function(){
         // previewImage.setAttribute("src",this.result);
         image.src= this.result;
-        canvas.style.width= "800px";
-        canvas.style.height= "400px";
+        canvas.style.width= "400px";
+        canvas.style.height= "200px";
         document.getElementById("input-container").setAttribute("style","width:0px");
         canvas.style.borderWidth= "3px 0 3px 3px";
         inputBtn.style.visibility= "hidden";
