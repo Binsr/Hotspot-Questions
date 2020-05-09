@@ -8,6 +8,7 @@ import javax.faces.bean.RequestScoped;
 public class Main {
 
    private Boolean isQuestionRendered = false;
+   private Boolean questionBtnRender  = true;
 
    public Main() {}
 
@@ -15,8 +16,17 @@ public class Main {
       return isQuestionRendered;
    }
 
-   public void setIsQuestionRendered(Boolean isQuestionRendered) {
-      this.isQuestionRendered = !isQuestionRendered;
+   public void questionRender() {
+      this.isQuestionRendered = !this.isQuestionRendered;
+      this.questionBtnRender = false;
+   }
+
+   public Boolean getQuestionBtnRender() {
+      return questionBtnRender;
+   }
+
+   public void questionBtnRender() {
+      this.questionBtnRender = !this.questionBtnRender;
    }
 
 }

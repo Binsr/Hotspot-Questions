@@ -16,7 +16,8 @@
 			</ui:include>
 		</h:panelGroup>
 		
-		<p:commandButton value="Add question" actionListener="#{main.setIsQuestionRendered}" update="question-container">
+		<p:commandButton value="Add question" actionListener="#{main.questionRender()}" update="@form"
+		rendered="#{main.questionBtnRender}" style="background-color:#00220c;color:white;">
 		</p:commandButton>
 		
 		
