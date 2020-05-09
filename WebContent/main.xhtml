@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Main page</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body style="background-color:black;">
+	<h:form>
+		<h:panelGroup id="question-container" rendered="#{main.isQuestionRendered}">
+			<ui:include src="question_form.xhtml">
+			</ui:include>
+		</h:panelGroup>
+		
+		<p:commandButton value="Add question" actionListener="#{main.setIsQuestionRendered}" update="question-container">
+		</p:commandButton>
+		
+		
+		<h:outputScript library="js" name="index.js" />
+	</h:form>
+		
+	</h:body>
+
+</html>
