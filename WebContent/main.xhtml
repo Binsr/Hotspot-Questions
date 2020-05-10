@@ -11,16 +11,16 @@
 </h:head>
 <h:body style="background-color:black;">
 	<h:form>
-		<h:panelGroup id="question-container">
+		<h:panelGroup id="question-container" rendered="#{main.isQuestionRendered}">
 			<ui:include src="question_form.xhtml">
 			</ui:include>
 		</h:panelGroup>
 		
 		<p:commandButton value="Add question" actionListener="#{main.questionRender()}" update="@form"
-		rendered="#{main.questionBtnRender}" style="background-color:#00220c;color:white;">
+			rendered="#{main.questionBtnRender}" style="background-color:#00220c;color:white;">
 		</p:commandButton>
 		
-	<h:outputScript library="js" name="index.js" />
+
 	</h:form>
 		
 	</h:body>

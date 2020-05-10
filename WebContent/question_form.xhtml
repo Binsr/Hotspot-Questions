@@ -16,12 +16,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	>
-			
+			<h:panelGroup>	
 				<canvas id="canvas-element" style="visibility: hidden;background-repeat: no-repeat;"></canvas>
 				
-				<div id="input-container">
+				<h:panelGroup id="input-container">
                 	<input type="file" id="input-container__img-input"/> 
-            	</div>  
+            	</h:panelGroup>  
             	
 				<h:panelGroup class="control_menu" layout="block" id="control_menu">
 					<p:inputTextarea style="height:10vh;"></p:inputTextarea>
@@ -45,4 +45,6 @@
 		
 					<p:commandButton id="submit_button" value="submit" style="background-color:#00220c;color:white;"/>
 				</h:panelGroup>
+			</h:panelGroup>	
+				<h:outputScript library="js" name="index.js" />
 	</ui:composition>

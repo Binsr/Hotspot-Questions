@@ -75,9 +75,9 @@ function uploadPic(){
     reader.addEventListener("load",function(){
         // previewImage.setAttribute("src",this.result);
         image.src= this.result;
-        canvas.style.width= "400px";
-        canvas.style.height= "200px";
-        document.getElementById("input-container").setAttribute("style","width:0px");
+        canvas.style.width= "700px";
+        canvas.style.height= "350px";
+        document.getElementById("j_idt6:input-container").setAttribute("style","width:0px");
         canvas.style.borderWidth= "3px 0 3px 3px";
         inputBtn.style.visibility= "hidden";
     });
@@ -119,7 +119,6 @@ function appLoop(timeStamp){
     lastTime= timeStamp;
 
     draw(ctx);
-/*    clickAnimation.updateTimer();*/
     requestAnimationFrame(appLoop);
 }
 requestAnimationFrame(appLoop);
