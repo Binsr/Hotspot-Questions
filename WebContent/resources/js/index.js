@@ -77,9 +77,9 @@ function uploadPic(){
         image.src= this.result;
         canvas.style.width= "700px";
         canvas.style.height= "350px";
-        document.getElementById("j_idt6:input-container").setAttribute("style","width:0px");
+//        document.getElementById("j_idt6:input-container").setAttribute("style","width:0px");
         canvas.style.borderWidth= "3px 0 3px 3px";
-        inputBtn.style.visibility= "hidden";
+//        inputBtn.style.visibility= "hidden";
     });
     canvas.style.visibility = "visible";
     reader.readAsDataURL(file);

@@ -18,13 +18,15 @@
 	>
 			<h:panelGroup>	
 				<canvas id="canvas-element" style="visibility: hidden;background-repeat: no-repeat;"></canvas>
-				
-				<h:panelGroup id="input-container">
-                	<input type="file" id="input-container__img-input"/> 
-            	</h:panelGroup>  
+				 
             	
 				<h:panelGroup class="control_menu" layout="block" id="control_menu">
-					<p:inputTextarea style="height:10vh;"></p:inputTextarea>
+					<h:panelGroup id="input-container">
+	                	<input type="file" id="input-container__img-input" style="background-color:green;height:4vh;color:white;border-radius: 3px;"/> 
+	            	</h:panelGroup> 
+					<br/><br/>
+				
+					<p:inputTextarea style="height:10vh;width:25vw"></p:inputTextarea>
 					<br/><br/>
 					<p:selectOneMenu style="width:150px" id="selected_shape" widgetVar="shape">
 						<f:selectItem itemLabel="Rect" itemValue="Rect" id="Rect" />
