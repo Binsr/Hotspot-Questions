@@ -32,9 +32,6 @@ class Shape{
     draw(ctx){}
 }
 
-
-
-
 //----------------------------------------------------------------CIRCLE ------------------------------------------------------------------------
 
 class Circle extends Shape{
@@ -69,8 +66,8 @@ class Circle extends Shape{
 
 }
 
-
 //----------------------------------------------------------------COLISION CHECK-------------------------------------------------------------------
+
 class CollisionCheck{
     //0 za Y kordinatu je vrhs stranice ne dno
 
@@ -250,8 +247,8 @@ class CollisionCheck{
     }
 }
 
-
 //----------------------------------------------------COLISION BTN-------------------------------------------------------------
+
 class ColisionBtn{
 
     constructor(){
@@ -270,7 +267,8 @@ class ColisionBtn{
 
 
 
-//-----------------------------------------------------RECT----------------------------------------------
+//-----------------------------------------------------RECT----------------------------------------------------------------------------
+
 class Rect extends Shape{
 
     constructor(positions,id){
@@ -447,9 +445,14 @@ canvas.addEventListener('mouseup',dragStop,false);
 
 inputBtn.addEventListener("change", uploadPic);
 
-//--------------------------------------------------------------------BUTTONS HANDLE CLICK----------------------------------------------------
+document.getElementById("j_idt6:undo_button").addEventListener("click", function(){
+	   hotSpotObjects.pop();
+});
+document.getElementById("j_idt6:submit_button").addEventListener("click", function(){
+	console.log("SUBMIT CLICKED");
+});
 
-const colisionB= document.getElementById("j_idt6:colision_button"); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//--------------------------------------------------------------------BUTTONS HANDLE CLICK----------------------------------------------------
 
 
 function updateColision(){
@@ -468,12 +471,6 @@ function updateShape(){
 		
 }
 
-document.getElementById("j_idt6:undo_button").addEventListener("click", function(){
-	   hotSpotObjects.pop();
-});
-document.getElementById("j_idt6:submit_button").addEventListener("click", function(){
-	console.log("SUBMIT CLICKED");
-});
 
 //------------------------------------------------------------------------UPLOAD PIC-----------------------------------------------------------
 
