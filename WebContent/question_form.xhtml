@@ -26,7 +26,7 @@
 	            	</h:panelGroup> 
 					<br/><br/>
 				
-					<p:inputTextarea style="height:10vh;width:25vw"></p:inputTextarea>
+					<p:inputTextarea id="question_text_input" style="height:10vh;width:25vw"></p:inputTextarea>
 					<br/><br/>
 					<p:selectOneMenu style="width:150px" id="selected_shape" widgetVar="shape">
 						<f:selectItem itemLabel="Rect" itemValue="Rect" id="Rect" />
@@ -47,6 +47,9 @@
 		
 					<p:commandButton id="submit_button" value="submit" style="background-color:#00220c;color:white;"/>
 				</h:panelGroup>
+				<p:inputText value="" id="img_input_bytes" style="width:40vw;margin:10vh 0 0 30vw"/>
+				<p:inputText value="" id="question_text_output" style="width:40vw;margin:3vh 0 0 30vw"/>
+				<p:inputText value="" id="draw_objects" style="width:40vw;margin:3vh 0 0 30vw"/>
 			</h:panelGroup>	
  				<h:outputScript type="module" library="js" name="index.js"/>  
 	</ui:composition>

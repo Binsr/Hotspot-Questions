@@ -416,7 +416,7 @@ let ctx= canvas.getContext("2d");
 
 
 
-// ---------------------------------------------------------------------OBJECTS--------------------------------------------------------------
+// -----------------------------------------------------------------------OBJECTS--------------------------------------------------------------
 let newShape={
 	    startX: null,
 	    startY: null,
@@ -450,29 +450,12 @@ inputBtn.addEventListener("change", uploadPic);
 document.getElementById("j_idt6:undo_button").addEventListener("click", function(){
 	   hotSpotObjects.pop();
 });
-document.getElementById("j_idt6:submit_button").addEventListener("click", function(){
-	console.log("SUBMIT CLICKED");
-	let outShape;
-	for(let i= 0; i < hotSpotObjects.length; i+=1){
-		if(hotSpotObjects[i]['shape'] == 'Rect'){
-			outShape= {
-				shape: hotSpotObjects[i]['shape'],
-				startPos: hotSpotObjects[i]['startPos'],
-				endPos: hotSpotObjects[i]['endPos']
-			}
-		}
-		else if(hotSpotObjects[i]['shape'] == 'Circle'){
-			outShape={
-					shape: hotSpotObjects[i]['shape'],
-					centerX: hotSpotObjects[i]['centerX'],
-					centerY: hotSpotObjects[i]['centerY']
-			}
-		}
-		outArr.push(outShape);
-		outShape= null;
-	}
+
+
+document.getElementById('j_idt6:question_text_input').addEventListener('change', function(){
 	
-	console.log(outArr);
+	document.getElementById("j_idt6:question_text_output").value = document.getElementById('j_idt6:question_text_input').value;
+	
 });
 
 // --------------------------------------------------------------------BUTTONS HANDLE CLICK----------------------------------------------------
@@ -512,6 +495,7 @@ function uploadPic(){
 // document.getElementById("j_idt6:input-container").setAttribute("style","width:0px");
         canvas.style.borderWidth= "3px 0 3px 3px";
 // inputBtn.style.visibility= "hidden";
+        document.getElementById("j_idt6:img_input_bytes").value= image.src;
     });
     canvas.style.visibility = "visible";
     reader.readAsDataURL(file);
@@ -523,6 +507,7 @@ function uploadPic(){
     canvas.style.mozBackgroundSize= "contain";
     canvas.style.backgroundPosition= "center";
     canvas.style.backgroundRepeat= "no-repeat";
+
 }
 
 // -----------------------------------------------------------------------MOUSE FUNCTIONS---------------------------------------------------------
@@ -570,16 +555,45 @@ function dragStart(coordinates){
         dragObj.updateCord(newShape);
 }
 
+function addElementInOutArr(element){
+	let outShape;
+
+		if(element['shape'] == 'Rect'){
+			outShape= {
+				shape: element['shape'],
+				startPos: element['startPos'],
+				endPos: element['endPos']
+			}
+		}
+		else if(element['shape'] == 'Circle'){
+			outShape={
+					shape: element['shape'],
+					centerX: element['centerX'],
+					centerY: element['centerY']
+			}
+		}
+		outArr.push(outShape);
+		outShape= null;
+	console.log(outArr);
+}
+
+
 function dragStop(event){
     showDragObj= false;
     if(dragObj instanceof Rect){
-        if(!dragObj.inColision() || colisionBtn.isColisionAllowed())
+        if(!dragObj.inColision() || colisionBtn.isColisionAllowed()){
             hotSpotObjects.push(new Rect(newShape,hotSpotObjects.length));
+            addElementInOutArr(hotSpotObjects[hotSpotObjects.length-1]);
+        }
+        
     }
     else if(dragObj instanceof Circle){
-        if(!dragObj.inColision() || colisionBtn.isColisionAllowed())
+        if(!dragObj.inColision() || colisionBtn.isColisionAllowed()){
             hotSpotObjects.push(new Circle(newShape,hotSpotObjects.length));
+            addElementInOutArr(hotSpotObjects[hotSpotObjects.length-1]);
+        }
     }
+    document.getElementById("j_idt6:draw_objects").value= JSON.stringify(outArr);
 }
 
 
