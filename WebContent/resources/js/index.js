@@ -1,10 +1,10 @@
 
-//------------------------------------------------SHAPE-----------------------------------------------------
+//------------------------------------------------SHAPE--------------------------------------------------------------------
 
 class Shape{
 
     constructor(id){
-
+    	this.shape= "Rect";
         this.id= id;
         this.colorInColision= "red";
         this.defaultColor= "green";
@@ -32,13 +32,13 @@ class Shape{
     draw(ctx){}
 }
 
-//----------------------------------------------------------------CIRCLE ------------------------------------------------------------------------
+// ----------------------------------------------------------------CIRCLE------------------------------------------------------------------------
 
 class Circle extends Shape{
 
     constructor(positions,id){
-
         super(id);
+        this.shape= "Circle";
         this.centerX= (positions.startX + positions.endX)/2;
         this.centerY= (positions.startY + positions.endY)/2;
         this.r= (Math.sqrt(Math.pow(positions.startX-positions.endX,2) + Math.pow(positions.startY - positions.endY,2)))/2;
@@ -66,14 +66,15 @@ class Circle extends Shape{
 
 }
 
-//----------------------------------------------------------------COLISION CHECK-------------------------------------------------------------------
+// ----------------------------------------------------------------COLISION CHECK-------------------------------------------------------------------
 
 class CollisionCheck{
-    //0 za Y kordinatu je vrhs stranice ne dno
+    // 0 za Y kordinatu je vrhs stranice ne dno
 
     static doesObjsCollide(dragObj,hotSpotObjects){
 
-        if(dragObj instanceof Rect){ //IZMENI kad dodas koliziju za krug //SVE PREBACI U CHECK COLLISION KLASU       
+        if(dragObj instanceof Rect){ // IZMENI kad dodas koliziju za krug
+										// //SVE PREBACI U CHECK COLLISION KLASU
                 for(let i= 0; i < hotSpotObjects.length; i++){
                     if(hotSpotObjects[i] instanceof Circle) 
                         if(this.doesCircleRectCol(hotSpotObjects[i],dragObj)){
@@ -116,7 +117,7 @@ class CollisionCheck{
         let circleElements= circle.getElements();
 
         if(circleElements.cx > rectAngleCoord.rightUp.x){
-            if(circleElements.cy > rectAngleCoord.rightUp.y && circleElements.cy < rectAngleCoord.rightDown.y){ //1
+            if(circleElements.cy > rectAngleCoord.rightUp.y && circleElements.cy < rectAngleCoord.rightDown.y){ // 1
                 if(circleElements.cx - circleElements.r < rectAngleCoord.rightUp.x){
                     return true;
                 }else
@@ -149,15 +150,19 @@ class CollisionCheck{
             }
 
         }else if(circleElements.cx > rectAngleCoord.leftUp.x){
-            if(circleElements.cy < rectAngleCoord.leftUp.y){ //2
-                if(circleElements.cy + circleElements.r > rectAngleCoord.leftUp.y){ //KONTRA SU UP AND DOWN
+            if(circleElements.cy < rectAngleCoord.leftUp.y){ // 2
+                if(circleElements.cy + circleElements.r > rectAngleCoord.leftUp.y){ // KONTRA
+																					// SU
+																					// UP
+																					// AND
+																					// DOWN
                     return true;
                 }else
                     return false;
-            }else if(circleElements.cy > rectAngleCoord.leftDown.y){ //4
+            }else if(circleElements.cy > rectAngleCoord.leftDown.y){ // 4
                 if(circleElements.cy - circleElements.r < rectAngleCoord.leftDown.y){
                     return true;
-                }else{ //3
+                }else{ // 3
                     return false;
                 }
             }else{
@@ -166,7 +171,7 @@ class CollisionCheck{
 
         }else{
             if(circleElements.cy > rectAngleCoord.leftUp.y && circleElements.cy < rectAngleCoord.leftDown.y){
-                if(circleElements.cx + circleElements.r > rectAngleCoord.leftDown.x){//5
+                if(circleElements.cx + circleElements.r > rectAngleCoord.leftDown.x){// 5
                     return true;
                 }else{
                     return false;
@@ -247,7 +252,7 @@ class CollisionCheck{
     }
 }
 
-//----------------------------------------------------COLISION BTN-------------------------------------------------------------
+// ----------------------------------------------------COLISION BTN-------------------------------------------------------------
 
 class ColisionBtn{
 
@@ -265,9 +270,7 @@ class ColisionBtn{
 }
 
 
-
-
-//-----------------------------------------------------RECT----------------------------------------------------------------------------
+// -----------------------------------------------------------RECT----------------------------------------------------------------------------
 
 class Rect extends Shape{
 
@@ -378,7 +381,8 @@ class Rect extends Shape{
             }
         }
 
-        //DEO ZA PREPRAVITI POMESAO KORDINATU Y, GLEDAO JE KAO DA JOJ JE 0 DOLE A NE U VRHU STRANICE***
+        // DEO ZA PREPRAVITI POMESAO KORDINATU Y, GLEDAO JE KAO DA JOJ JE 0 DOLE
+		// A NE U VRHU STRANICE***
         let tmp = pointsOfAngles.leftUp;
         pointsOfAngles.leftUp= pointsOfAngles.leftDown;
         pointsOfAngles.leftDown= tmp;
@@ -386,7 +390,7 @@ class Rect extends Shape{
         tmp= pointsOfAngles.rightUp;
         pointsOfAngles.rightUp= pointsOfAngles.rightDown;
         pointsOfAngles.rightDown= tmp;
-        //----------------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------------
         return pointsOfAngles;
     }
 
@@ -400,7 +404,7 @@ class Rect extends Shape{
 
 
 
-//-----------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------
 
 const IMG_WIDTH = 700;
 const IMG_HEIGHT = 350;
@@ -410,19 +414,17 @@ const IMG_POS_Y= 0;
 let canvas= document.getElementById("canvas-element");
 let ctx= canvas.getContext("2d");
 
-function getCanvasCoordinates(event){
-    let x= event.clientX - canvas.getBoundingClientRect().left;
-    let y= event.clientY - canvas.getBoundingClientRect().top;
-    return {x: x, y: y};
-}
 
-//---------------------------------------------------------------------OBJECTS--------------------------------------------------------------
+
+// ---------------------------------------------------------------------OBJECTS--------------------------------------------------------------
 let newShape={
 	    startX: null,
 	    startY: null,
 	    endX: null,
 	    endY: null
 };
+
+outArr= [];
 
 let dragObj= null;
 let showDragObj= false;
@@ -437,7 +439,7 @@ const colisionBtn= new ColisionBtn();
 let colisionState= false;
 let selectedShape= "Rect";
 
-//---------------------------------------------------------------------EVENT LISTENERS---------------------------------------------------------
+// ---------------------------------------------------------------------EVENT LISTENERS---------------------------------------------------------
 
 canvas.addEventListener('mousedown',mouseClick,false);
 canvas.addEventListener('mousemove',drag,false);
@@ -450,9 +452,30 @@ document.getElementById("j_idt6:undo_button").addEventListener("click", function
 });
 document.getElementById("j_idt6:submit_button").addEventListener("click", function(){
 	console.log("SUBMIT CLICKED");
+	let outShape;
+	for(let i= 0; i < hotSpotObjects.length; i+=1){
+		if(hotSpotObjects[i]['shape'] == 'Rect'){
+			outShape= {
+				shape: hotSpotObjects[i]['shape'],
+				startPos: hotSpotObjects[i]['startPos'],
+				endPos: hotSpotObjects[i]['endPos']
+			}
+		}
+		else if(hotSpotObjects[i]['shape'] == 'Circle'){
+			outShape={
+					shape: hotSpotObjects[i]['shape'],
+					centerX: hotSpotObjects[i]['centerX'],
+					centerY: hotSpotObjects[i]['centerY']
+			}
+		}
+		outArr.push(outShape);
+		outShape= null;
+	}
+	
+	console.log(outArr);
 });
 
-//--------------------------------------------------------------------BUTTONS HANDLE CLICK----------------------------------------------------
+// --------------------------------------------------------------------BUTTONS HANDLE CLICK----------------------------------------------------
 
 
 function updateColision(){
@@ -472,7 +495,7 @@ function updateShape(){
 }
 
 
-//------------------------------------------------------------------------UPLOAD PIC-----------------------------------------------------------
+// ------------------------------------------------------------------------UPLOAD PIC-----------------------------------------------------------
 
 let image= new Image();
 
@@ -486,26 +509,34 @@ function uploadPic(){
         image.src= this.result;
         canvas.style.width= "700px";
         canvas.style.height= "350px";
-//        document.getElementById("j_idt6:input-container").setAttribute("style","width:0px");
+// document.getElementById("j_idt6:input-container").setAttribute("style","width:0px");
         canvas.style.borderWidth= "3px 0 3px 3px";
-//        inputBtn.style.visibility= "hidden";
+// inputBtn.style.visibility= "hidden";
     });
     canvas.style.visibility = "visible";
     reader.readAsDataURL(file);
-/*	-webkit-background-size: contain;
-	-moz-background-size: contain;
-	-o-background-size: contain;*/
+/*
+ * -webkit-background-size: contain; -moz-background-size: contain;
+ * -o-background-size: contain;
+ */
     canvas.style.backgroundSize= "contain";
     canvas.style.mozBackgroundSize= "contain";
     canvas.style.backgroundPosition= "center";
     canvas.style.backgroundRepeat= "no-repeat";
 }
 
-//-----------------------------------------------------------------------MOUSE FUNCTIONS---------------------------------------------------------
+// -----------------------------------------------------------------------MOUSE FUNCTIONS---------------------------------------------------------
+
+
+function getCanvasCoordinates(event){
+    let x= event.clientX - canvas.getBoundingClientRect().left;
+    let y= event.clientY - canvas.getBoundingClientRect().top;
+    return {x: x, y: y};
+}
+
 
 function mouseClick(event){
     let coordinates= getCanvasCoordinates(event);
-
     dragStart(coordinates);
 
 }
@@ -552,14 +583,15 @@ function dragStop(event){
 }
 
 
-//------------------------------------------------------------------------PROCESS LOOP-----------------------------------------------------------
+// ------------------------------------------------------PROCESS LOOP-----------------------------------------------------------
+
 function draw(ctx){
     ctx.clearRect(IMG_POS_X,IMG_POS_Y, IMG_WIDTH, IMG_HEIGHT); 
     ctx.drawImage(image,IMG_POS_X,IMG_POS_Y,IMG_WIDTH,IMG_HEIGHT);
     for(let i= 0; i < hotSpotObjects.length; i++){
         hotSpotObjects[i].draw(ctx);
-   }
-   if(showDragObj && dragObj)
+    }
+    if(showDragObj && dragObj)
         dragObj.draw(ctx);
 }
 
