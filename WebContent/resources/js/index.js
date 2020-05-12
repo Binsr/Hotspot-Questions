@@ -572,7 +572,8 @@ function addElementInOutArr(element){
 			outShape={
 					shape: element['shape'],
 					centerX: element['centerX'],
-					centerY: element['centerY']
+					centerY: element['centerY'],
+					r: element['r']
 			}
 		}
 		outArr.push(outShape);

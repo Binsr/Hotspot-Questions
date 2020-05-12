@@ -5,16 +5,19 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	>
-		<div style="margin:0 auto;display:flex; border-width:2px;border-style:solid;border-color:white;flex-direction:column;width:700px; text-align:center;padding-top:10px;">
-			<h:outputLabel style="color:white;" value="#{question.questionText}"></h:outputLabel>
+		<div style="margin:10vh auto;display:flex; border-width:2px;border-style:solid;border-color:white;flex-direction:column;width:700px; text-align:center;padding-top:10px;">
+			<h:outputLabel style="color:blue;" value="#{question.questionText}"></h:outputLabel>
+			<br/><br/>
+			<p id="answer_final" style="color:white;font-size:14">Green(Good)/Red(Bad))</p>
 			<br/>
 			<canvas id="canvas-answer" width="700" height="350" style="margin: 5vh 0 0 0"></canvas>
 				<br/><br/><br/>
 				<p:inputText value="#{question.image}" id="answering_image" style="visibility: hidden;"></p:inputText>
 				<br/><br/>
-				<p:inputText value="#{question.selectedAreas}" style="visibility: hidden;"></p:inputText>
+				<p:inputText value="#{question.selectedAreas}" id="answering_slected_areas" style="visibility: hidden;"></p:inputText>
 				<br/><br/>
-				
+				<p:commandButton id="undo_answer" value="undo answer" style="background-color:lightblue;color:black;width:50%;margin: 0 auto 3vh auto"/>
+				<p:commandButton id="submit_answer" value="Submit answer" style="background-color:green;color:white;width:50%;margin: 0 auto 3vh auto"/>
 				<h:outputScript type="module" library="js" name="answer.js"/>  
 		</div>
 	</ui:composition> 
