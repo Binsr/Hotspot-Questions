@@ -7,10 +7,15 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class Main {
 
-   private Boolean isQuestionRendered = false;
-   private Boolean questionBtnRender  = true;
+   private Boolean  isQuestionRendered = false;
+   private Boolean  questionBtnRender  = true;
+   private Boolean  isAnsweringRendered;
+   private Question question;
 
-   public Main() {}
+   public Main() {
+      question = new Question();
+      isAnsweringRendered = false;
+   }
 
    public Boolean getIsQuestionRendered() {
       return isQuestionRendered;
@@ -29,4 +34,21 @@ public class Main {
       this.questionBtnRender = !this.questionBtnRender;
    }
 
+   public Question getQuestion() {
+      if (question == null)
+         question = new Question();
+      return question;
+   }
+
+   public void setQuestion(Question question) {
+      this.question = question;
+   }
+
+   public Boolean getIsAnsweringRendered() {
+      return isAnsweringRendered;
+   }
+
+   public void setIsAnsweringRendered() {
+      this.isAnsweringRendered = !this.isAnsweringRendered;
+   }
 }

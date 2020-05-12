@@ -449,6 +449,8 @@ inputBtn.addEventListener("change", uploadPic);
 
 document.getElementById("j_idt6:undo_button").addEventListener("click", function(){
 	   hotSpotObjects.pop();
+	   outArr.pop();
+	   document.getElementById("j_idt6:draw_objects").value= JSON.stringify(outArr);
 });
 
 
@@ -490,6 +492,7 @@ function uploadPic(){
     reader.addEventListener("load",function(){
         // previewImage.setAttribute("src",this.result);
         image.src= this.result;
+        console.log(image)
         canvas.style.width= "700px";
         canvas.style.height= "350px";
 // document.getElementById("j_idt6:input-container").setAttribute("style","width:0px");

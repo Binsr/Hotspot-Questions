@@ -1,0 +1,20 @@
+
+	<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	>
+		<div style="margin:0 auto;display:flex; border-width:2px;border-style:solid;border-color:white;flex-direction:column;width:700px; text-align:center;padding-top:10px;">
+			<h:outputLabel style="color:white;" value="#{question.questionText}"></h:outputLabel>
+			<br/>
+			<canvas id="canvas-answer" width="700" height="350" style="margin: 5vh 0 0 0"></canvas>
+				<br/><br/><br/>
+				<p:inputText value="#{question.image}" id="answering_image" style="visibility: hidden;"></p:inputText>
+				<br/><br/>
+				<p:inputText value="#{question.selectedAreas}" style="visibility: hidden;"></p:inputText>
+				<br/><br/>
+				
+				<h:outputScript type="module" library="js" name="answer.js"/>  
+		</div>
+	</ui:composition> 

@@ -13,13 +13,33 @@
 	<h:form>
 		<h:panelGroup id="question-container" rendered="#{main.isQuestionRendered}">
 			<ui:include src="question_form.xhtml">
+				<ui:param name="quest" value="#{main.question}"></ui:param> 
 			</ui:include>
 		</h:panelGroup>
+
 		
 		<p:commandButton value="Add question" actionListener="#{main.questionRender()}" update="@form"
-			rendered="#{main.questionBtnRender}" style="background-color:#00220c;color:white; margin: 5vh 0 0 45vw ;">
+			rendered="#{main.questionBtnRender}" style="background-color:#00220c;color:white; margin: 5vh 0 0 43.5vw ;">
 		</p:commandButton>
+		<br/><br/>
 		
+		<p:commandButton value="submit"  actionListener="#{main.setIsAnsweringRendered()}" update="@form" 
+			rendered="true"  style="background-color:#00220c;color:white;margin:5vh 0 0 45vw">
+		</p:commandButton>
+		<br/><br/>
+		
+		<p:inputText id="img_input_bytes" value="#{main.question.image}" style="margin:0 0 0 20vw;width:60vw"/>
+		<br/><br/>
+		<p:inputText id="question_text_output" value="#{main.question.questionText}" style="margin:0 0 0 20vw;width:60vw"/>
+		<br/><br/>
+		<p:inputText id="draw_objects" value="#{main.question.selectedAreas}" style="margin:0 0 0 20vw;width:60vw"/>
+		<br/><br/>
+		
+				<h:panelGroup rendered="#{main.isAnsweringRendered}">
+	 		<ui:include src="answering_form.xhtml">
+				<ui:param name="question" value="#{main.question}"></ui:param> 
+			</ui:include> 
+		</h:panelGroup>
 
 	</h:form>
 	
