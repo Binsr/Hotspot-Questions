@@ -414,6 +414,7 @@ const IMG_POS_Y= 0;
 let canvas= document.getElementById("canvas-element");
 let ctx= canvas.getContext("2d");
 
+let allowedDrawing= true;
 
 
 // -----------------------------------------------------------------------OBJECTS--------------------------------------------------------------
@@ -551,6 +552,8 @@ function drag(event){
     }
 }
 function dragStart(coordinates){
+	if(!allowedDrawing)
+		return;
     newShape.startX= coordinates.x;
     newShape.startY= coordinates.y;
     showDragObj= true;
@@ -583,6 +586,9 @@ function addElementInOutArr(element){
 
 
 function dragStop(event){
+	if(!allowedDrawing)
+		return;
+	
     showDragObj= false;
     if(dragObj instanceof Rect){
         if(!dragObj.inColision() || colisionBtn.isColisionAllowed()){
@@ -600,23 +606,135 @@ function dragStop(event){
     document.getElementById("j_idt6:draw_objects").value= JSON.stringify(outArr);
 }
 
+//------------------------------------------------------FANCY ANIMATION---------------------------------------------------------------
+
+class SubmitAnimation{
+
+    constructor(ctxWidth,ctxHeight){
+        this.startX= ctxWidth/3;
+        this.startY= ctxHeight/2;
+
+
+        this.movingPointX= this.startX;
+        this.movingPointY= this.startY;
+
+        this.movingEndPointX= null;
+        this.movingEndPointY= null;
+
+        this.timer1= 0;
+        this.timer2= 0;
+        this.timeInterval= ctxHeight/8;
+        this.isAnimationActive= false;
+        this.runned= false;
+    }
+    isRunned(){
+    	return this.runned;
+    }
+    
+    updateMovingPoint(){
+        this.movingPointX+=6;
+        this.movingPointY+=6;
+    }
+
+    updateMovingEndPoint(){
+        this.movingEndPointX+=6;
+        this.movingEndPointY-=6;
+    }
+
+    startAnimation(){
+        this.isAnimationActive= true;
+    }
+
+    isAnimActive(){
+        return this.isAnimationActive;
+    }
+
+    updateTimer(){
+        if(!this.isAnimationActive)
+            return;
+
+        this.timer1+=3;
+
+
+        if(this.timer1 >= this.timeInterval){
+
+            if(!this.movingEndPointX){
+                this.movingEndPointX= this.movingPointX;
+                this.movingEndPointY= this.movingPointY;
+            }
+            if(this.timer2 < this.timeInterval+50){
+                this.drawEndLine= true;
+                this.timer2+=3;
+                this.updateMovingEndPoint();
+            }else{
+                this.timer1= 0;
+                this.timer2= 0;
+                this.drawEndLine= false;
+                this.isAnimationActive= false;
+                this.runned= true;
+                this.movingPointX= this.startX;
+                this.movingPointY= this.startY;
+                this.movingEndPointX= null;
+                this.movingEndPointY= null;
+                return false;
+            }
+        }else{
+            this.updateMovingPoint();
+        }
+    }
+
+    draw(ctx){
+        ctx.globalAlpha = 0.75;
+        ctx.fillStyle= "gray";
+        ctx.fillRect(0,0,700,600);
+        ctx.globalAlpha = 1.0;
+
+        ctx.lineWidth= 50;
+        ctx.strokeStyle = 'green';
+        ctx.beginPath();
+        ctx.moveTo(this.startX, this.startY);
+        ctx.lineTo(this.movingPointX, this.movingPointY);
+        if(this.drawEndLine){
+            ctx.lineTo(this.movingEndPointX,this.movingEndPointY);
+        }
+        ctx.stroke(); 
+    }
+}
+
+let animationObj= new SubmitAnimation(IMG_WIDTH, IMG_HEIGHT);
+
+function startAnimation(){
+	allowedDrawing= false;
+	animationObj.startAnimation();	
+}
+
+
+
 
 // ------------------------------------------------------PROCESS LOOP-----------------------------------------------------------
 
 function draw(ctx){
     ctx.clearRect(IMG_POS_X,IMG_POS_Y, IMG_WIDTH, IMG_HEIGHT); 
     ctx.drawImage(image,IMG_POS_X,IMG_POS_Y,IMG_WIDTH,IMG_HEIGHT);
+    	
     for(let i= 0; i < hotSpotObjects.length; i++){
         hotSpotObjects[i].draw(ctx);
     }
     if(showDragObj && dragObj)
         dragObj.draw(ctx);
+    
 }
 
 function appLoop(timeStamp){
-    lastTime= timeStamp;
-
+	if(animationObj.isRunned())
+		return;
+	lastTime= timeStamp;
     draw(ctx);
+    if(animationObj.isAnimActive()){
+    	animationObj.draw(ctx);
+    	animationObj.updateTimer();
+
+    }
     requestAnimationFrame(appLoop);
 }
 requestAnimationFrame(appLoop);
